@@ -13,17 +13,24 @@ interface ImageProps {
 
 export function Image({ photo }: ImageProps) {
   async function handleDeleteImageInDatabase(path: string) {
-    const storageRef = ref(storage, `images/${path}`);
+    const result = confirm(`Deseja excluir a imagem ${path} da sua galeria?`)
 
-    await deleteObject(storageRef)
-      .then(() => console.log("Imagem deletada"))
-      .catch(() => console.log("Erro ao deletar imagem"));
+    if (result) {
+      const storageRef = ref(storage, `images/${path}`);
 
-    await deleteDoc(doc(firestore, "photos", path))
-      .then(() => console.log("imagem deleteda do banco"))
-      .catch(() => console.log("Erro ao deletar imagem do banco"));
+      await deleteObject(storageRef)
+        .then(() => console.log("Imagem deletada"))
+        .catch(() => console.log("Erro ao deletar imagem"));
 
-    return alert("Imagem deletada da sua galeria")
+      await deleteDoc(doc(firestore, "photos", path))
+        .then(() => console.log("imagem deleteda do banco"))
+        .catch(() => console.log("Erro ao deletar imagem do banco"));
+
+      return alert("Imagem deletada com sucesso!")
+    } else {
+      return;
+    }
+
   }
 
   return (
