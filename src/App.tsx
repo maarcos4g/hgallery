@@ -1,10 +1,10 @@
-import { listAll, StorageReference } from "firebase/storage"
+import { useEffect, useState } from "react";
 import { firestore } from "./services/firebase"
 
 import { Header } from "./components/Header"
 import { Image } from "./components/Image"
-import { useEffect, useState } from "react";
 import { collection, getDocs, } from "firebase/firestore";
+import { EmptyList } from "./components/EmptyList";
 
 export interface Photo {
   name: string;
@@ -42,6 +42,8 @@ function App() {
           <Image key={photo.url} photo={photo} />
         ))}
       </div>
+
+      {photos?.length === 0 && <EmptyList />}
     </div>
   )
 }
