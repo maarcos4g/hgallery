@@ -17,7 +17,7 @@ export function Header() {
           className='border border-blue-400 font-semibold rounded-lg px-6 py-4 flex items-center gap-3 hover:border-blue-500 transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-blue-700'
         >
           <Plus size="20" className="text-blue-400" />
-          Upload
+          Novo upload
         </Dialog.Trigger>
 
         <Dialog.Portal>

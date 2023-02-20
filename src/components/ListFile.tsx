@@ -25,6 +25,7 @@ export function ListFile({ loading, file, onSuccess, onError }: ListFileProps) {
           <span className='text-xs text-[#999] mt-1'>
             {fileSize.toString()}
           </span>
+          {loading && <span className='text-zinc-700 text-xs font-bold'>Enviando...</span>}
         </div>
 
         <div className='mr-4 flex items-center gap-2'>
