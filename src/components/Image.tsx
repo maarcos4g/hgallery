@@ -13,7 +13,7 @@ interface ImageProps {
 
 export function Image({ photo }: ImageProps) {
   async function handleDeleteImageInDatabase(path: string) {
-    const result = confirm(`Deseja excluir a imagem ${path} da sua galeria?`)
+    const result = confirm(`Deseja excluir ${path} da sua galeria?`)
 
     if (result) {
       const storageRef = ref(storage, `images/${path}`);
