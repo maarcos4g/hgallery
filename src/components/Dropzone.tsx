@@ -8,8 +8,11 @@ import { Image } from "phosphor-react"
 import { ListFile } from './ListFile';
 
 import { firestore, storage } from '../services/firebase';
+import { useAuth } from '../hooks/useAuth';
 
 export function DropZone() {
+  const { user } = useAuth();
+
   const [loading, setLoading] = useState(true);
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState(false);
@@ -45,6 +48,7 @@ export function DropZone() {
               size: file.size,
               type: file.type,
               url: url,
+              author: user
             }
             await setDoc(
               doc(firestore, "photos", `${file.name}`),

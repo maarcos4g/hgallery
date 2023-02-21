@@ -1,7 +1,7 @@
 import { deleteObject, ref } from "firebase/storage";
 import { firestore, storage } from "../services/firebase";
 
-import { Photo } from "../App";
+import { Photo } from "../pages/Home";
 import { Image as PhosphorImage, TrashSimple } from "phosphor-react"
 
 import colors from "tailwindcss/colors";
