@@ -43,7 +43,7 @@ export function Home() {
 
   useEffect(() => {
     getAllPhotosInDatabase()
-  }, [user])
+  }, [user, photos])
 
   return (
     <div className="w-full h-screen bg-[#FEFEFE]">

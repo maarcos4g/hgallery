@@ -40,7 +40,7 @@ export function Header() {
         </Dialog.Root>
 
         {user?.avatar ?
-          <img src={user?.avatar} className="w-10 h-10 rounded-full border-[2px] border-blue-400 cursor-pointer" /> :
+          <img src={user?.avatar} className="w-10 h-10 rounded-full cursor-pointer" /> :
           <span className='w-10 h-10 border rounded-full bg-blue-400 flex items-center justify-center text-white font-semibold text-2xl'>
             {initialName}
           </span>}
