@@ -28,6 +28,14 @@ export function AuthContextProvider(props: AuthContextProviderProps) {
   const navigate = useNavigate()
 
   useEffect(() => {
+    const storedUser = JSON.parse(localStorage.getItem('user') || 'null');
+    if (storedUser) {
+      setUser(storedUser);
+    }
+    // navigate({ pathname: "/home" })
+  }, [])
+
+  useEffect(() => {
     const onSubscribe = auth.onAuthStateChanged(user => {
       if (user) {
         const { displayName, photoURL, uid, email } = user;
@@ -36,20 +44,27 @@ export function AuthContextProvider(props: AuthContextProviderProps) {
           throw new Error('Missing information from Google Account');
         }
 
-        setUser({
+        const newUser = {
           id: uid,
           name: displayName,
-          avatar: photoURL ?? "",
+          avatar: photoURL!,
           email: email,
-        })
+        };
+
+        setUser(newUser);
+        localStorage.setItem('user', JSON.stringify(newUser));
         navigate({ pathname: "/home" })
+      } else {
+        setUser(undefined);
+        localStorage.removeItem('user');
+        navigate({ pathname: "/" })
       }
     })
 
     return () => {
       onSubscribe();
     }
-  }, [])
+  }, [navigate])
 
   async function signInWithGoogle() {
     const provider = new GoogleAuthProvider();
@@ -63,13 +78,16 @@ export function AuthContextProvider(props: AuthContextProviderProps) {
         throw new Error('Missing information from Google Account');
       }
 
-      setUser({
+      const newUser = {
         id: uid,
         name: displayName,
-        avatar: photoURL ?? "",
+        avatar: photoURL!,
         email: email,
-      })
-      return navigate({ pathname: "/home" })
+      };
+
+      setUser(newUser)
+      localStorage.setItem('user', JSON.stringify(newUser));
+      navigate({ pathname: "/home" })
     }
   }
 

@@ -30,7 +30,7 @@ export function Home() {
     }
 
     const collectionRef = collection(firestore, 'photos');
-    const queryUser = query(collectionRef, where('author', '==', user));
+    const queryUser = query(collectionRef, where('author.id', '==', user?.id));
     const snapshot = await getDocs(queryUser);
 
     const photoList: Photo[] = []
@@ -43,7 +43,7 @@ export function Home() {
 
   useEffect(() => {
     getAllPhotosInDatabase()
-  }, [photos])
+  }, [user])
 
   return (
     <div className="w-full h-screen bg-[#FEFEFE]">
